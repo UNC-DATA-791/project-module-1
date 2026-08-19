@@ -175,7 +175,7 @@ def _():
 def _():
     mo.md(r"""
     Suppose a gene has zero counts in every sample of one strain, but nonzero counts in the other strain. **How would you quantify the difference in expression between the two strains for this gene?** Think about what happens if you try a standard metric like log fold-change. 🤔
-    """).callout(kind="info", title="Question")
+    """).callout(kind="info")
     return
 
 
