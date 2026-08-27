@@ -75,7 +75,7 @@ def _():
     return count_df, pheno_df
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
     We also have a table `pheno_df` that holds sample metadata. We'll randomly split the samples into two groups, making sure both mouse strains are approximately equally represented in each group. The idea is that we can see how stable our log fold change estimates are by comparing the values we get for each gene across each sample group.
