@@ -34,16 +34,13 @@ def _(mo):
 
 
 @app.cell
-def _():
-    import altair as alt
-    import polars as pl
-    import statsmodels.formula.api as smf
-    import numpy as np
-    import warnings
-    from statsmodels.tools.sm_exceptions import ConvergenceWarning
+def _(mo):
+    mo.md(r"""
+    # Unit 2 assignment
 
-    warnings.filterwarnings('ignore', category=ConvergenceWarning)
-    return (pl,)
+    In this assignment we are going to calculate log fold change of gene expression. We'll use the experiment and data from [Bottomly et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC3063777/).
+    """)
+    return
 
 
 @app.cell(hide_code=True)
@@ -57,22 +54,13 @@ def _(mo):
 
 
 @app.cell
-def _():
-    RECOUNT_URL = "https://bowtie-bio.sourceforge.net/recount"
+def _(mo):
+    mo.md(r"""
+    # Unit 2 assignment
 
-    URLS = {
-        "bottomly_count_table.txt": f"{RECOUNT_URL}/countTables/bottomly_count_table.txt",
-        "bottomly_phenodata.txt": f"{RECOUNT_URL}/phenotypeTables/bottomly_phenodata.txt",
-    }
-
-    # your code here: load both files into polars tables, and rename the
-    # phenodata's "sample.id" column to "sample_id"
-    raise NotImplementedError("Load the two files into count_df and pheno_df.")
-    count_df = ...
-    pheno_df = ...
-
-    count_df
-    return count_df, pheno_df
+    In this assignment we are going to calculate log fold change of gene expression. We'll use the experiment and data from [Bottomly et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC3063777/).
+    """)
+    return
 
 
 @app.cell(hide_code=True)
@@ -135,6 +123,14 @@ def _(count_df, pheno_df_split, pl):
 def _(mo):
     mo.md(r"""
     `get_gene_lfc` takes a count table for one gene (produced with `get_gene_table`) and computes its log2 fold change between strains, separately for each of the two sample splits.
+
+    We're fitting a Poisson regression where `count` depends on `strain`, using `total_count` as an offset to account for each sample's sequencing depth:
+
+    $$
+    \log\big(E[\texttt{count}]\big) = \beta_0 + \beta_1 \cdot \texttt{strain} + \log(\texttt{total\_count})
+    $$
+
+    Here $\beta_1$ is the **log fold change (LFC)** between strains, on the natural-log scale. This is the value you convert to log2 fold change in step 3 below.
 
     You've been given the model formula and the `statsmodels` code to create and fit the model. **You need to finish this function**.
 
