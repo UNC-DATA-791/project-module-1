@@ -34,13 +34,16 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
-    mo.md(r"""
-    # Unit 2 assignment
+def _():
+    import altair as alt
+    import polars as pl
+    import statsmodels.formula.api as smf
+    import numpy as np
+    import warnings
+    from statsmodels.tools.sm_exceptions import ConvergenceWarning
 
-    In this assignment we are going to calculate log fold change of gene expression. We'll use the experiment and data from [Bottomly et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC3063777/).
-    """)
-    return
+    warnings.filterwarnings('ignore', category=ConvergenceWarning)
+    return (pl,)
 
 
 @app.cell(hide_code=True)
@@ -53,14 +56,23 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    # Unit 2 assignment
+@app.cell
+def _():
+    RECOUNT_URL = "https://bowtie-bio.sourceforge.net/recount"
 
-    In this assignment we are going to calculate log fold change of gene expression. We'll use the experiment and data from [Bottomly et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC3063777/).
-    """)
-    return
+    URLS = {
+        "bottomly_count_table.txt": f"{RECOUNT_URL}/countTables/bottomly_count_table.txt",
+        "bottomly_phenodata.txt": f"{RECOUNT_URL}/phenotypeTables/bottomly_phenodata.txt",
+    }
+
+    # your code here: load both files into polars tables, and rename the
+    # phenodata's "sample.id" column to "sample_id"
+    raise NotImplementedError("Load the two files into count_df and pheno_df.")
+    count_df = ...
+    pheno_df = ...
+
+    count_df
+    return count_df, pheno_df
 
 
 @app.cell(hide_code=True)
