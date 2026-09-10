@@ -1,3 +1,12 @@
+# /// script
+# requires-python = ">=3.14"
+# dependencies = [
+#     "altair==6.2.2",
+#     "marimo>=0.24.0",
+#     "polars==1.44.2",
+# ]
+# ///
+
 import marimo
 
 __generated_with = "0.24.0"
@@ -16,6 +25,23 @@ def _():
     import polars as pl
     import altair as alt
     alt.data_transformers.enable("vegafusion")
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    # Unit 4 assignment
+
+    The tables in this assignment come from a DESeq2 differential expression analysis of the **Bottomly mouse strain RNA-seq dataset**. [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a popular R package that analyzes gene expression data with the methods we have been studying.
+
+    ### Tables
+
+    | Table | Description |
+    | --- | --- |
+    | `LogFoldChange` (`lfc_actual_vs_moderated.csv`) | Has the MLE and MAP log2 fold change estimates for each gene using all available sample data. |
+    | `LFC_experimental_splits` (`lfc_split1_vs_split2.csv`) | Compares log2 fold change estimates calculated from two halves of the data set. We will use it to check how consistent the estimates are between experiments. |
+    """)
     return
 
 
@@ -56,8 +82,6 @@ def _(mo):
 @app.cell
 def _():
     # Code goes here
-
-
     return
 
 
@@ -98,8 +122,6 @@ def _(y_axis_col):
 @app.cell
 def _():
     # Code goes here
-
-
     return
 
 
@@ -130,8 +152,6 @@ def _(mo):
 @app.cell
 def _():
     # Code goes here
-
-
     return
 
 
@@ -161,8 +181,6 @@ def _(mo):
 @app.cell
 def _():
     # Code goes here
-
-
     return
 
 
