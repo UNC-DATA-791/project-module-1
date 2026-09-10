@@ -125,7 +125,7 @@ def _(count_df, pheno_df_split, pl):
                 pl.col('count').sum().over('sample_id').alias('total_count')
             )
             .filter(pl.col('gene')==gene_id)
-            .join(pheno_df_split, on=['sample_id'])
+            .join(pheno_df, on=['sample_id'])
         )
 
     return (get_gene_table,)
@@ -166,12 +166,12 @@ def _(pl):
 
         rec = {}
         for split in [0, 1]:
-        
+    
             split_df = gene_df.filter(pl.col('split')==split).to_pandas()
-        
+    
             # This is the model code assuming your split specific dataframe is called "split_df" 
             # res = smf.poisson(formula, data=split_df, offset=np.log(split_df['total_count'])).fit(disp=False)
-        
+    
             raise NotImplementedError("Fit the Poisson model, convert the coef. to log2fc, and store it in rec.")
 
         return rec
@@ -217,7 +217,6 @@ def _(mo):
 @app.cell
 def _():
     # your chart code here
-
 
     return
 
